@@ -13,13 +13,13 @@ router.use(function (req, res, next) {
   });
   req.on('end', function () {
     bodyString = bodyString || '{}';
-    req.body = eval('(' + bodyString + ')');
+    req.body = JSON(bodyString);
     next();
   });
 });
 
 router.use(session({
-  secret: 'tongiscool',
+  secret: require('../../secrets').session,
   resave: false,
   saveUninitialized: false
 }));
